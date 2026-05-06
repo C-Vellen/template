@@ -21,7 +21,7 @@ CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 # --- Stage build CSS (utilisé uniquement pendant le build prod) ---
 FROM base AS css-builder
 RUN poetry install --only main --no-root
-COPY . .
+COPY src/ .
 RUN python manage.py tailwind install
 RUN python manage.py tailwind build
 
@@ -38,7 +38,7 @@ RUN pip install poetry
 RUN poetry config virtualenvs.create false
 COPY pyproject.toml poetry.lock ./
 RUN poetry install --only main --no-root
-COPY . .
+COPY src/ .
 COPY --from=css-builder /app/src/theme/static/css/dist/style.css \
                          ./theme/static/css/dist/style.css
 RUN python manage.py collectstatic --noinput

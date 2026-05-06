@@ -7,3 +7,4 @@ notes
 /src/src/settings/develop.py
 /src/src/settings/production.py
 node_modules/
+.vscode
