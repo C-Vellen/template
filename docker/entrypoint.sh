@@ -10,10 +10,10 @@ echo "Database ready."
 
 if [ "$DJANGO_ENV" = "production" ]; then
   echo "Applying migrations..."
-  python manage.py migrate --noinput
+  python src/manage.py migrate --noinput
 
   echo "Collecting static files..."
-  python manage.py collectstatic --noinput
+  python src/manage.py collectstatic --noinput
 fi
 
 echo "Starting application..."
