@@ -8,8 +8,6 @@ ENV PYTHONPATH=/app/src
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y nodejs npm && rm -rf /var/lib/apt/lists/*
-
 RUN pip install poetry
 RUN poetry config virtualenvs.create false
 
@@ -23,12 +21,21 @@ COPY ../ ./
 CMD ["python", "src/manage.py", "runserver", "0.0.0.0:8000"]
 
 # ---------- CSS Builder ----------
-FROM base AS css-builder
-COPY ../pyproject.toml ../poetry.lock ./
-RUN poetry install --only main --no-root
-COPY ../ ./
-RUN python src/manage.py tailwind install
-RUN python src/manage.py tailwind build
+FROM node:20 AS css-builder
+
+WORKDIR /app
+
+# Copier tout static_src (config + package.json + styles.css)
+COPY ../src/theme/static_src ./src/theme/static_src
+
+WORKDIR /app/src/theme/static_src
+
+RUN npm install
+
+RUN npx tailwindcss \
+    -i ./src/styles.css \
+    -o ../static/css/dist/style.css \
+    --minify
 
 # ---------- Production ----------
 FROM python:3.12-slim AS production
