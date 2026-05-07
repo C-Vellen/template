@@ -51,7 +51,7 @@ COPY ../ ./
 COPY --from=css-builder /app/src/theme/static/css/dist/style.css \
                         ./src/theme/static/css/dist/style.css
 
-COPY entrypoint.sh /entrypoint.sh
+COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 CMD ["/entrypoint.sh", "gunicorn", "src.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3"]
