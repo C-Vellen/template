@@ -16,6 +16,7 @@ dependencies = [
     "pillow (>=12.2.0,<13.0.0)",
     "django-tailwind[reload] (>=4.4.2,<5.0.0)",
     "django-browser-reload (>=1.12.1,<2.0.0)",
+    "gunicorn (>=26.0.0,<27.0.0)",
 ]
 
 
