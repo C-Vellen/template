@@ -8,6 +8,10 @@ ENV PYTHONPATH=/app/src
 
 WORKDIR /app
 
+# intallation package manquant dans python-slim (inutile si pyathon-bookworm)
+# install postgresql-client pour permettre d'utiliser pg_isready dans entrypoint.sh
+RUN apt-get update && apt-get install -y postgresql-client && rm -rf /var/lib/apt/lists/*
+
 RUN pip install poetry
 RUN poetry config virtualenvs.create false
 

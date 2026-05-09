@@ -6,6 +6,7 @@ services:
       context: ..
       dockerfile: docker/Dockerfile
       target: production
+    env_file: ../.env
     environment:
       DJANGO_ENV: production
     volumes:
