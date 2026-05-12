@@ -1,4 +1,4 @@
-# ---------- Base ----------
+# ---------- Dev ----------
 FROM python:3.12-slim AS base
 
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -14,13 +14,20 @@ RUN poetry config virtualenvs.create false
 COPY ../pyproject.toml ../poetry.lock ./
 RUN poetry install --no-root
 
-# ---------- Dev ----------
+# ---------- Development ----------
 FROM base AS development
 
+# Installer Node pour django-tailwind
+RUN apt-get update && apt-get install -y curl && \
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs && \
+    npm install -g npm
+
 COPY ../ ./
+
 CMD ["python", "src/manage.py", "runserver", "0.0.0.0:8000"]
 
-# ---------- CSS Builder ----------
+# ---------- CSS Builder (prod) ----------
 FROM node:20 AS css-builder
 
 WORKDIR /app

@@ -50,6 +50,17 @@ def initiales(user):
             last = ""
         return first + last
 
+@register.filter
+def find_name(user):
+    """renvoie les prénoms et nom de user"""
+    if user.is_anonymous:
+        return ""
+    else:
+        first = user.first_name
+        last = user.last_name
+ 
+        return f"{first} {last}"
+
 
 
 

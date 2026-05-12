@@ -19,3 +19,5 @@ MIDDLEWARE += [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
+# désactivation du cache en dev pour que les modifications sur les fichiers statiques soient prises en compte:
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
