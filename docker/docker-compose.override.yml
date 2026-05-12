@@ -6,17 +6,4 @@ services:
       - ../:/app
     environment:
       DJANGO_ENV: development
-
-  tailwind:
-    build:
-      context: ..
-      dockerfile: docker/Dockerfile
-      target: development
-    working_dir: /app
-    command: python src/manage.py tailwind start
-    volumes:
-      - ../:/app
-    depends_on:
-      - web
-    tty: true
-    stdin_open: true
+    

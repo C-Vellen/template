@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta charset="utf-8" />
         {% tailwind_css %}
+        {% comment %} <link rel="stylesheet" href="{% static 'theme/static/css/dist/style.css' %}"> {% endcomment %}
         <link rel="shortcut icon" type="image/png" href="{{ Favicon|find_img }}" />
         <link rel="apple-touch-icon" sizes="180x180" href="{{ Favicon|find_img }}" />
         <title>{{titre_onglet}}</title>
@@ -13,11 +14,11 @@
         {% block header %}
         {% endblock %}
     </head>
-    <body class="m-0 p-0 font-sans text-slate-700 bg-slate-100">
+    <body class="m-0 p-0 font-sans text-slate-700 bg-page">
         
         <div class="w-full min-w-screen-xs min-h-screen flex flex-col justify-start items-center">
             
-            <header class="fixed z-10 pl-8 pr-12 h-16 w-full flex flex-row justify-between items-center bg-margin text-white sm:h-20">
+            <header class="fixed z-10 pl-8 pr-12 h-16 w-full flex flex-row justify-between items-center bg-page text-black sm:h-20">
                 <div id="logo">
                     <a href="{% url 'home:index' %}#accueil">
                         <img class="h-12 sm:h-16" src="{{ Bandeau_logo|find_file }}" alt="{{ Bandeau_logo|find_content:1 }}" />
@@ -30,13 +31,13 @@
                     <div id="navbar" class="flex flex-row justify-between items-center gap-4 sm:gap-4">
                 
                         <a href="{% url 'home:index' %}" class="">
-                                <img class="h-8" src="{% static 'img/home_white.svg' %}" />
+                                <img class="h-8" src="{% static 'img/home_black.svg' %}" />
                         </a>
                         
-                        <a href="{% url 'user:connexion' %}" title="connectez-vous !" class="text-sm m-0 p-0 w-8 h-8 border-white border-2 bg-transparent rounded-full text-center flex justify-center items-center" style="color:transparent; text-shadow: 0 0 0 #fff;">{{user|initiales}}</a>
+                        <a href="{% url 'user:connexion' %}" title="connectez-vous !" class="text-sm m-0 p-0 w-8 h-8 border-black border-2 bg-transparent rounded-full text-center flex justify-center items-center" style="color:transparent; text-shadow: 0 0 0 #000;">{{user|initiales}}</a>
                         
                         <a id="deconnect-button" class="group hover:cursor-pointer" >
-                            <img class="h-8 group-hover:hidden" src="{% static 'img/deconnexion_white.svg' %}" />  
+                            <img class="h-8 group-hover:hidden" src="{% static 'img/deconnexion_black.svg' %}" />  
                             <img class="h-8 hidden group-hover:inline" src="{% static 'img/deconnexion_red.svg' %}" />
                         </a>
                     </div>
@@ -47,7 +48,7 @@
             <main class="mt-20 mb-12 px-6 max-w-6xl w-full flex flex-col justify-between items-center"> 
                 {% block content %}{% endblock %}
             </main>
-            <footer class="w-full mt-auto px-16 py-4 bg-margin text-slate-200">
+            <footer class="w-full mt-auto px-16 py-4 bg-page text-slate-700">
                 <h2 class="text-md font-bold"> {{ Footer_description|find_content:30 }} </h2>
                 <ul class="flex flex-row justify-center items-center gap-4">
                     {% if Lien_1|find_file != "" %}
@@ -78,7 +79,7 @@
 
         {% if debug %}
         {# Utilitaire affichant les tailles d'écran - masqué en production #}
-        <div class="fixed z-30 bottom-4 left-4 bg-slate-300 p-1 rounded font-bold">
+        <div class="fixed z-30 bottom-4 left-4 bg-action p-1 rounded text-slate-300 font-bold">
             <span class="sm:hidden">XS</span>
             <span class="hidden sm:block md:hidden">SM</span>
             <span class="hidden md:block lg:hidden">MD</span>
